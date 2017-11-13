@@ -1,0 +1,33 @@
+{
+    "name": "jeremymullis/site-wp-plugins",
+    "minimum-stability":"dev",
+    "prefer-stable": true,
+    "config": {
+    	"secure-http":false
+    },
+    "repositories":[
+        {
+            "type":"composer",
+            "url":"http://wpackagist.org"
+        },
+        {
+          "type": "git",
+          "url": "https://github.com/drdogbot7/sage-8-webpack"
+        }
+    ],
+    "require": {
+        "roots/soil": "*",
+		    "wp-sync-db/wp-sync-db": "*",
+        "wpackagist-plugin/contact-form-7": "*",
+        "wpackagist-plugin/custom-post-type-ui": "*",
+        "wpackagist-plugin/breadcrumb-navxt": "*",
+        "wpackagist-plugin/html-editor-syntax-highlighter": "*",
+        "drdogbot7/sage-8-webpack": "^8.5"
+    },
+    "authors": [
+        {
+            "name": "Jeremy Mullis",
+            "email": "jeremy.mullis@gmail.com"
+        }
+    ]
+}
