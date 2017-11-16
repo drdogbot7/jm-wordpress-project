@@ -22,7 +22,7 @@
     "wpackagist-plugin/html-editor-syntax-highlighter": "*",
     "wpackagist-plugin/autoptimize": "*",
     "wpackagist-plugin/wp-smushit": "*",
-    "drdogbot7/sage-8-webpack": "dev-webpack"
+    "drdogbot7/sage-8-webpack": "dev-webpack-starter"
   },
   "authors": [
     {
