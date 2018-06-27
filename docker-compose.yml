@@ -4,7 +4,6 @@ services:
     image: mysql:5.7
     volumes:
       - "./.data/db:/var/lib/mysql"
-    restart: always
     ports:
       - "5319:3306"
     environment:
@@ -16,18 +15,24 @@ services:
   wp:
     depends_on:
       - db
-    image: conetix/wordpress-with-wp-cli
+    image: wordpress
     links:
       - db
     ports:
       - "5318:80"
-    restart: always
     working_dir: /var/www/html
     volumes:
      - ./wp-content/:/var/www/html/wp-content
-     - ./scratch/:/var/www/html/scratch  
-     - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
     environment:
       WORDPRESS_DB_HOST: db:3306
       WORDPRESS_DB_PASSWORD: wordpress
       WORDPRESS_TABLE_PREFIX: "wp_"
+  
+  wpcli:
+    image: wordpress:cli
+    volumes_from:
+      - wp
+    links:
+      - db
+    entrypoint: wp  
+    command: "--info"
