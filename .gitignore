@@ -5,7 +5,7 @@ php.ini
 # ignore dumb filesystem stuff
 .DS_Store
 
-# ignore core wordpress stuff
+# ignore wordpress stuff
 /index.php
 /license.txt
 /readme.html
@@ -24,18 +24,8 @@ wp-settings.php
 wp-signup.php
 wp-trackback.php
 /xmlrpc.php
-
 /wp-config.php
-
-# ignore "wp-content" directory, except:
-# "themes" directory
-wp-content/index.php
-wp-content/plugins/*
-wp-content/uploads/*
-
-# ignore default themes
-wp-content/themes/twenty*/
-wp-content/themes/index.php
+wp-content
 
 # ignore npm dependency directories
 node_modules/

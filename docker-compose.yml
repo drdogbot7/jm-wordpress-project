@@ -1,38 +1,50 @@
-version: '2'
+version: "3.1"
+
 services:
+  wp:
+    image: wordpress:latest
+    ports:
+      - 8080:80
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DEBUG: 1
+    volumes:
+      - ./wp-content:/var/www/html/wp-content
+      - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+
   db:
     image: mysql:5.7
-    volumes:
-      - "./.data/db:/var/lib/mysql"
-    ports:
-      - "5319:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: wordpress
       MYSQL_DATABASE: wordpress
       MYSQL_USER: wordpress
       MYSQL_PASSWORD: wordpress
-
-  wp:
-    depends_on:
-      - db
-    image: wordpress
-    links:
-      - db
-    ports:
-      - "5318:80"
-    working_dir: /var/www/html
+      MYSQL_RANDOM_ROOT_PASSWORD: "1"
     volumes:
-     - ./wp-content/:/var/www/html/wp-content
-    environment:
-      WORDPRESS_DB_HOST: db:3306
-      WORDPRESS_DB_PASSWORD: wordpress
-      WORDPRESS_TABLE_PREFIX: "wp_"
-  
+      - ./db:/var/lib/mysql
+
   wpcli:
     image: wordpress:cli
-    volumes_from:
+    depends_on:
+      - db
       - wp
     links:
       - db
-    entrypoint: wp  
+    entrypoint: wp
     command: "--info"
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+    ports:
+      - 9000:80
+    volumes:
+      - /sessions
+
+volumes:
+  wp-content:
+  db:
